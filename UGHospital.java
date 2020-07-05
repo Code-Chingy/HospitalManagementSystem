@@ -1,6 +1,7 @@
-package com.techupstudio;
+package com.techupstudio.school_management_system;
 
-import com.techupstudio.Base.Models.Hospital;
+
+import com.techupstudio.school_management_system.base.models.Hospital;
 
 public class UGHospital extends Hospital {
 

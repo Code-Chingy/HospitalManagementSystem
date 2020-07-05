@@ -1,4 +1,4 @@
-package com.techupstudio.Base.Utils.DatabaseManager;
+package com.techupstudio.school_management_system.base.sqlite_database;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -6,18 +6,19 @@ import java.util.logging.Logger;
 
 public class SQLDatabase {
 
-    private Connection CONNECTION;
-    private Logger LOG;
+    private Connection connection;
+    private Logger logger;
 
     public SQLDatabase(String db_path){
 
-        CONNECTION = null;
-        LOG = Logger.getLogger("SQLDatabase: ");
+        connection = null;
+        logger = Logger.getLogger("SQLDatabase: ");
 
         try {
+            //Class.forName("org.sqlite.JDBC");
             String connectURI = "jdbc:sqlite:"+db_path;
-            CONNECTION = DriverManager.getConnection(connectURI);
-            LOG.log(Level.INFO, "HospitalDatabase connection successful");
+            connection = DriverManager.getConnection(connectURI);
+            logger.log(Level.INFO, "HospitalDatabase connection successful");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -25,16 +26,16 @@ public class SQLDatabase {
 
 
     public Connection getConnection() {
-        return CONNECTION;
+        return connection;
     }
 
     public boolean hasConnection() {
-        return CONNECTION != null;
+        return connection != null;
     }
 
     public void close() {
         try {
-            CONNECTION.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,7 +43,7 @@ public class SQLDatabase {
 
     public boolean isClosed() {
         try {
-            return CONNECTION.isClosed();
+            return connection.isClosed();
         } catch (SQLException e) {
             e.printStackTrace();
         }

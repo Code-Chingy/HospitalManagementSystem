@@ -1,4 +1,4 @@
-package com.techupstudio.Base.Utils.DatabaseManager;
+package com.techupstudio.school_management_system.base.sqlite_database;
 
 public class TableField {
 

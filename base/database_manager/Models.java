@@ -1,4 +1,4 @@
-package com.techupstudio.Base.HospitalDatabaseManager;
+package com.techupstudio.school_management_system.base.database_manager;
 
 public class Models {
 

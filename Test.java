@@ -1,10 +1,10 @@
-package com.techupstudio;
+package com.techupstudio.school_management_system;
 
-import com.techupstudio.Base.HospitalDatabaseManager.Models;
-import com.techupstudio.Base.Models.Bed;
-import com.techupstudio.Base.Models.Hospital;
-import com.techupstudio.Base.Models.Staff;
-import com.techupstudio.Base.Models.Ward;
+import com.techupstudio.school_management_system.base.database_manager.Models;
+import com.techupstudio.school_management_system.base.models.Bed;
+import com.techupstudio.school_management_system.base.models.Hospital;
+import com.techupstudio.school_management_system.base.models.Staff;
+import com.techupstudio.school_management_system.base.models.Ward;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,7 +24,7 @@ public class Test {
 
     private static void prepareUgHospital(){
 
-        ugHospital = new Hospital("src/com/techupstudio/Base/Data/test_ug_hospital_database.db") {
+        ugHospital = new Hospital("src/com/techupstudio/base/data/test_ug_hospital_database.db") {
 
             @Override
             public void prepareHospital() {

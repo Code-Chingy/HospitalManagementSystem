@@ -1,6 +1,6 @@
-package com.techupstudio.Base.Models;
+package com.techupstudio.school_management_system.base.models;
 
-import com.techupstudio.Base.HospitalDatabaseManager.Models;
+import com.techupstudio.school_management_system.base.database_manager.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;

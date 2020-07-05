@@ -1,8 +1,8 @@
-package com.techupstudio.Base.HospitalDatabaseManager;
+package com.techupstudio.school_management_system.base.database_manager;
 
-import com.techupstudio.Base.Models.*;
-import com.techupstudio.Base.Utils.DatabaseManager.ContentValues;
-import com.techupstudio.Base.Utils.DatabaseManager.SQLDatabase;
+import com.techupstudio.school_management_system.base.models.*;
+import com.techupstudio.school_management_system.base.sqlite_database.ContentValues;
+import com.techupstudio.school_management_system.base.sqlite_database.SQLDatabase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -282,14 +282,14 @@ public class HospitalDatabase extends SQLDatabase {
 
 
 //        if (Integer.valueOf(execSQL().withTable("OBJECT_INFO").select().where(
-//                Models.OBJECT_INFO.OBJECT_ID + " == " + person.getObjectID()
+//                models.OBJECT_INFO.OBJECT_ID + " == " + person.getObjectID()
 //                        + " AND " +
-//                        Models.OBJECT_INFO.KEY + " == " + key)
+//                        models.OBJECT_INFO.KEY + " == " + key)
 //                .getResult().all().count().get(0).toString()) > 1){
 //            execSQL().withTable("OBJECT_INFO").update(contentValues).where(
-//                    Models.OBJECT_INFO.OBJECT_ID + " == " + person.getObjectID()
+//                    models.OBJECT_INFO.OBJECT_ID + " == " + person.getObjectID()
 //                            + " AND " +
-//                            Models.OBJECT_INFO.KEY + " == " + key
+//                            models.OBJECT_INFO.KEY + " == " + key
 //            ).commit();
 //        }
 //        else{

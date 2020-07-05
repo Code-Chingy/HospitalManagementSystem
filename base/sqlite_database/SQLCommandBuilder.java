@@ -1,4 +1,4 @@
-package com.techupstudio.Base.Utils.DatabaseManager;
+package com.techupstudio.school_management_system.base.sqlite_database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class SQLCommandBuilder {
 
-    Connection CONNECTION;
+    private Connection connection;
 
     private void log(String tag, String message){
         Logger.getLogger("Hospital Database")
@@ -19,16 +19,16 @@ public class SQLCommandBuilder {
     }
 
     public SQLCommandBuilder(Connection connection){
-        CONNECTION = connection;
+        this.connection = connection;
     }
 
     public Connection getConnection() {
-        return CONNECTION;
+        return connection;
     }
 
     public Statement getStatement() {
         try {
-            return CONNECTION.createStatement();
+            return connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,8 +106,8 @@ public class SQLCommandBuilder {
                     return new OrderBy(QUERY_1, column);
                 }
 
-                public ResultBuilder getResult(){
-                    return new ResultBuilder(QUERY_1);
+                public Result getResult(){
+                    return new Result(QUERY_1);
                 }
 
             }
@@ -145,8 +145,8 @@ public class SQLCommandBuilder {
                 return new OrderBy(QUERY, column);
             }
 
-            public ResultBuilder getResult(){
-                return new ResultBuilder(QUERY);
+            public Result getResult(){
+                return new Result(QUERY);
             }
 
         }
@@ -271,8 +271,8 @@ public class SQLCommandBuilder {
                 return new GroupHaving(QUERY_1, condition);
             }
 
-            public ResultBuilder getResult(){
-                return new ResultBuilder(QUERY_1);
+            public Result getResult(){
+                return new Result(QUERY_1);
             }
 
         }
@@ -289,8 +289,8 @@ public class SQLCommandBuilder {
                 return new OrderBy(QUERY_1, column);
             }
 
-            public ResultBuilder getResult(){
-                return new ResultBuilder(QUERY_1);
+            public Result getResult(){
+                return new Result(QUERY_1);
             }
         }
 
@@ -302,26 +302,26 @@ public class SQLCommandBuilder {
                 QUERY_1 = query+" ORDER BY "+column;
             }
             
-            public ResultBuilder ascending(){
+            public Result ascending(){
                 QUERY_1 += " ASC";
-                return new ResultBuilder(QUERY_1);
+                return new Result(QUERY_1);
             }
 
-            public ResultBuilder descending(){
+            public Result descending(){
                 QUERY_1 += " DESC";
-                return new ResultBuilder(QUERY_1);
+                return new Result(QUERY_1);
             }
 
-            public ResultBuilder getResult(){
-                return new ResultBuilder(QUERY_1);
+            public Result getResult(){
+                return new Result(QUERY_1);
             }
         }
 
-        public class ResultBuilder {
+        public class Result {
 
             private String QUERY_1;
 
-            ResultBuilder(String query){
+            Result(String query){
                 QUERY_1 = query;
             }
 
@@ -380,32 +380,13 @@ public class SQLCommandBuilder {
                     return getStatement().executeQuery(FINAL_QUERY);
                 }
             }
-            
+
             public class PaginaterBuilder {
 
                 private String FINAL_QUERY;
                 private ResultSet RESULT_SET;
                 private long PAGINATION_LIMIT;
 
-                public class Paginater{
-
-                    private ResultSet RESULT_SET;
-                    private long PAGINATION_LIMIT;
-
-                    public Paginater(ResultSet resultSet, long limit){
-                        RESULT_SET = resultSet;
-                        PAGINATION_LIMIT = limit;
-                    }
-
-                    public boolean hasNextBatch(){ return false; }
-
-                    public boolean hasPreviousBatch(){ return false; }
-
-                    public ResultSet getNextBatch(){ return null; }
-
-                    public ResultSet getPreviousBatch(){ return null; }
-
-                }
 
                 public PaginaterBuilder(String query, long limit){
                     PAGINATION_LIMIT = limit;
@@ -418,6 +399,27 @@ public class SQLCommandBuilder {
                 }
             }
 
+            public class Paginater{
+
+                private ResultSet RESULT_SET;
+                private long PAGINATION_LIMIT;
+
+                public Paginater(ResultSet resultSet, long limit){
+                    RESULT_SET = resultSet;
+                    PAGINATION_LIMIT = limit;
+                }
+
+                public boolean hasNextBatch(){ return false; }
+
+                public boolean hasPreviousBatch(){ return false; }
+
+                public ResultSet getNextBatch(){ return null; }
+
+                public ResultSet getPreviousBatch(){ return null; }
+
+            }
+
+
             //TODO: FUTURE
             private class ResultItem{
                 //TODO  : build result item
@@ -426,7 +428,7 @@ public class SQLCommandBuilder {
 
             //TODO: FUTURE
             private class ResultItems extends ArrayList<ResultItem>{
-                //TODO : build result items Data
+                //TODO : build result items data
             }
             
             public All all(){ 

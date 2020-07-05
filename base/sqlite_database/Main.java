@@ -1,4 +1,4 @@
-package com.techupstudio.Base.Utils.DatabaseManager;
+package com.techupstudio.school_management_system.base.sqlite_database;
 
 import java.sql.SQLException;
 
@@ -26,7 +26,7 @@ public class Main {
 //            System.out.println("success "+commit.getUpdateCount());
 //        }
 
-        SQLCommandBuilder.Query.ResultBuilder.PaginaterBuilder.Paginater result = db.execSQL().withTable("staffs")
+        SQLCommandBuilder.Query.Result.Paginater result = db.execSQL().withTable("staffs")
                 .select("job_title", "COUNT(*) as count")
                 .groupBy("job_title").orderBy("count")
                 .getResult().paginate(10).get();

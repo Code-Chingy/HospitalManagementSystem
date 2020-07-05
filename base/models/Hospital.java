@@ -1,7 +1,7 @@
-package com.techupstudio.Base.Models;
+package com.techupstudio.school_management_system.base.models;
 
-import com.techupstudio.Base.HospitalDatabaseManager.HospitalDatabase;
-import com.techupstudio.Base.HospitalDatabaseManager.Models;
+import com.techupstudio.school_management_system.base.database_manager.HospitalDatabase;
+import com.techupstudio.school_management_system.base.database_manager.Models;
 
 import java.util.Map;
 

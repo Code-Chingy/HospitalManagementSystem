@@ -1,4 +1,4 @@
-package com.techupstudio.Base.Models;
+package com.techupstudio.school_management_system.base.models;
 
 
 public class Visitor extends Person {
