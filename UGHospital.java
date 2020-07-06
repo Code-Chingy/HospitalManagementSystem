@@ -10,6 +10,12 @@ public class UGHospital extends Hospital {
         super("ug_hospital_database.db");
     }
 
+    private static void loopOperation(Operation operation, int number) {
+        for (int i = 0; i < number; i++) {
+            operation.run();
+        }
+    }
+
     @Override
     public void prepareHospital() {
         // TODO: create Hospital Settings
@@ -18,12 +24,8 @@ public class UGHospital extends Hospital {
         // TODO: add wards and staffs
     }
 
-    interface Operation{ void run();}
-
-    private static void loopOperation(Operation operation, int number){
-        for (int i=0;i<number;i++){
-            operation.run();
-        }
+    interface Operation {
+        void run();
     }
 
 }

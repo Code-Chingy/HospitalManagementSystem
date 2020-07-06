@@ -14,17 +14,17 @@ import java.util.logging.Logger;
 
 public class HospitalDatabase extends SQLDatabase {
 
-    public HospitalDatabase(String db_path){
+    public HospitalDatabase(String db_path) {
         super(db_path);
         createDatabaseTables();
     }
 
-    private void log(String tag, String message){
+    private void log(String tag, String message) {
         Logger.getLogger("Hospital Database")
-                .log(Level.INFO, (tag+": "+message));
+                .log(Level.INFO, (tag + ": " + message));
     }
 
-    private void createDatabaseTables(){
+    private void createDatabaseTables() {
         //TODO :  tables : STAFF | PATIENTS | VISITORS |  UTILITIES| ROOM | OBJECT_INFO
         //TODO : | PATIENTS_HEALTH_RECORDS | INPATIENTS_RECORDS | SETTINGS/PREFERENCES
 
@@ -42,7 +42,7 @@ public class HospitalDatabase extends SQLDatabase {
                     Models.PERSON.DATEOFBIRTH + " DATETIME NOT NULL"
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table persons
@@ -56,7 +56,7 @@ public class HospitalDatabase extends SQLDatabase {
                     Models.UTILITIES.OWNER_ID + " TEXT NOT NULL" //object_id
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table utilities
@@ -71,7 +71,7 @@ public class HospitalDatabase extends SQLDatabase {
                     Models.OBJECT_INFO.VALUE + " TEXT"
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table object_info
@@ -85,7 +85,7 @@ public class HospitalDatabase extends SQLDatabase {
                     Models.ROOM.PARENT + " TEXT" //id of parent room
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table object_info
@@ -93,16 +93,16 @@ public class HospitalDatabase extends SQLDatabase {
         //UTILITIES - PATIENTS_HEALTH_RECORDS
         try {
             execSQL().withTable("PATIENTS_HEALTH_RECORDS").create(
-                    Models.PATIENT.HEALTH_RECORDS.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT",
-                    Models.PATIENT.HEALTH_RECORDS.PATIENT_ID  + " TEXT NOT NULL",
-                    Models.PATIENT.HEALTH_RECORDS.CHECK_IN_TIMESTAMP  + " DATETIME DEFAULT DATETIME",
-                    Models.PATIENT.HEALTH_RECORDS.CHECK_OUT_TIMESTAMP+ " DATETIME",
-                    Models.PATIENT.HEALTH_RECORDS.HEALTH_PROBLEM +" TEXT",
-                    Models.PATIENT.HEALTH_RECORDS.HEALTH_SOLUTION +" TEXT",
-                    Models.PATIENT.HEALTH_RECORDS.TREATMENT_RESPONSE +" TEXT"
+                    Models.PATIENT.HEALTH_RECORDS.ID + " INTEGER PRIMARY KEY AUTOINCREMENT",
+                    Models.PATIENT.HEALTH_RECORDS.PATIENT_ID + " TEXT NOT NULL",
+                    Models.PATIENT.HEALTH_RECORDS.CHECK_IN_TIMESTAMP + " DATETIME DEFAULT DATETIME",
+                    Models.PATIENT.HEALTH_RECORDS.CHECK_OUT_TIMESTAMP + " DATETIME",
+                    Models.PATIENT.HEALTH_RECORDS.HEALTH_PROBLEM + " TEXT",
+                    Models.PATIENT.HEALTH_RECORDS.HEALTH_SOLUTION + " TEXT",
+                    Models.PATIENT.HEALTH_RECORDS.TREATMENT_RESPONSE + " TEXT"
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table patient_health_records
@@ -110,18 +110,18 @@ public class HospitalDatabase extends SQLDatabase {
         //UTILITIES - PATIENTS_HEALTH_REPORTS
         try {
             execSQL().withTable("INPATIENTS_PROGRESS_REPORTS").create(
-                    Models.INPATIENT.PROGRESS_REPORT.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT",
+                    Models.INPATIENT.PROGRESS_REPORT.ID + " INTEGER PRIMARY KEY AUTOINCREMENT",
                     Models.INPATIENT.PROGRESS_REPORT.PATIENT_ID + " TEXT NOT NULL",
                     Models.INPATIENT.PROGRESS_REPORT.HEALTH_PERSONNEL_TYPE + " TEXT NOT NULL",
                     Models.INPATIENT.PROGRESS_REPORT.HEALTH_PERSONNEL_ID + " TEXT NOT NULL",
                     Models.INPATIENT.PROGRESS_REPORT.TREATMENT_ACTIVITY + " TEXT",
                     Models.INPATIENT.PROGRESS_REPORT.TREATMENT_RESPONSE + " TEXT",
-                    Models.INPATIENT.PROGRESS_REPORT.CHECK_IN_TIMESTAMP  + " DATETIME DEFAULT DATETIME",
-                    Models.INPATIENT.PROGRESS_REPORT.CHECK_OUT_TIMESTAMP  + " DATETIME",
-                    Models.INPATIENT.PROGRESS_REPORT.NOTES +" TEXT"
+                    Models.INPATIENT.PROGRESS_REPORT.CHECK_IN_TIMESTAMP + " DATETIME DEFAULT DATETIME",
+                    Models.INPATIENT.PROGRESS_REPORT.CHECK_OUT_TIMESTAMP + " DATETIME",
+                    Models.INPATIENT.PROGRESS_REPORT.NOTES + " TEXT"
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table inpatient_progress_reports
@@ -136,24 +136,24 @@ public class HospitalDatabase extends SQLDatabase {
                     Models.OBJECT_UID.UID_CURRENT_COUNT + " INTEGER NOT NULL"
             ).commit();
         } catch (SQLException e) {
-            log("Error",e.getMessage());
+            log("Error", e.getMessage());
         }
 
         //TODO: log created table inpatient_progress_reports
 
     }
 
-    private boolean validatePerson(Person person){
-        if (person instanceof Staff){
-            return  (person.hasProperty(Models.STAFF.FIRSTNAME) && person.hasProperty(Models.STAFF.LASTNAME) &&
+    private boolean validatePerson(Person person) {
+        if (person instanceof Staff) {
+            return (person.hasProperty(Models.STAFF.FIRSTNAME) && person.hasProperty(Models.STAFF.LASTNAME) &&
                     person.hasProperty(Models.STAFF.CONTACT) && person.hasProperty(Models.STAFF.GENDER) &&
                     person.hasInfo(Models.STAFF.INFO_JOB_TITLE) && person.hasProperty(Models.STAFF.OBJECT_ID));
-        }else if (person instanceof Patient){
-            return  (person.hasProperty(Models.PATIENT.FIRSTNAME) && person.hasProperty(Models.PATIENT.LASTNAME) &&
+        } else if (person instanceof Patient) {
+            return (person.hasProperty(Models.PATIENT.FIRSTNAME) && person.hasProperty(Models.PATIENT.LASTNAME) &&
                     person.hasProperty(Models.PATIENT.CONTACT) && person.hasProperty(Models.PATIENT.GENDER) &&
                     person.hasProperty(Models.PATIENT.OBJECT_ID));
-        }else if (person instanceof Visitor){
-            return  (person.hasProperty(Models.VISITOR.FIRSTNAME) && person.hasProperty(Models.VISITOR.LASTNAME) &&
+        } else if (person instanceof Visitor) {
+            return (person.hasProperty(Models.VISITOR.FIRSTNAME) && person.hasProperty(Models.VISITOR.LASTNAME) &&
                     person.hasProperty(Models.VISITOR.CONTACT) && person.hasProperty(Models.VISITOR.GENDER) &&
                     person.hasProperty(Models.VISITOR.OBJECT_ID) && person.hasProperty(Models.VISITOR.INFO_RELATION) &&
                     person.hasProperty(Models.VISITOR.INFO_VISIT_REASON) &&
@@ -162,9 +162,10 @@ public class HospitalDatabase extends SQLDatabase {
         return false;
     }
 
-    public void validateRoom(String... ids){}
+    public void validateRoom(String... ids) {
+    }
 
-    public void addUIDFormatForObjectType(String object_type, String prefix, String postfix, int startIDNumber){
+    public void addUIDFormatForObjectType(String object_type, String prefix, String postfix, int startIDNumber) {
         if (object_type != null && startIDNumber >= 0) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(Models.OBJECT_UID.TYPE, object_type.toLowerCase());
@@ -179,39 +180,39 @@ public class HospitalDatabase extends SQLDatabase {
         }
     }
 
-    public String nextUIDForObjectType(String object_type){
+    public String nextUIDForObjectType(String object_type) {
         Map<String, Object> nextUIDElements = getUIDElementsForObjectType(object_type);
         String UIDPrefix = nextUIDElements.get("prefix").toString();
-        Integer currentUIDNumber =  (Integer) nextUIDElements.get("current_count");
-        String UIDPostfix =  nextUIDElements.get("postfix").toString();
+        Integer currentUIDNumber = (Integer) nextUIDElements.get("current_count");
+        String UIDPostfix = nextUIDElements.get("postfix").toString();
         //TODO: update current_uid_count
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Models.OBJECT_UID.UID_CURRENT_COUNT, (currentUIDNumber+1));
+        contentValues.put(Models.OBJECT_UID.UID_CURRENT_COUNT, (currentUIDNumber + 1));
         try {
             execSQL().withTable("OBJECT_UID_FORMATS").update(contentValues)
-                    .where(Models.OBJECT_UID.TYPE+" == '"+object_type.toLowerCase()+"'")
+                    .where(Models.OBJECT_UID.TYPE + " == '" + object_type.toLowerCase() + "'")
                     .commit();
-            return "" + ((UIDPrefix != null) ? UIDPrefix : "") + (currentUIDNumber+1) + ((UIDPostfix != null) ? UIDPostfix : "");
+            return "" + ((UIDPrefix != null) ? UIDPrefix : "") + (currentUIDNumber + 1) + ((UIDPostfix != null) ? UIDPostfix : "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Map<String, Object> getUIDElementsForObjectType(String object_type){
+    public Map<String, Object> getUIDElementsForObjectType(String object_type) {
         try {
             ResultSet result = execSQL().withTable("OBJECT_UID_FORMATS")
-                    .select().where(Models.OBJECT_UID.TYPE+" == '"+object_type.toLowerCase()+"'").
+                    .select().where(Models.OBJECT_UID.TYPE + " == '" + object_type.toLowerCase() + "'").
                             getResult().all().get();
 
-            if (result.next()){
+            if (result.next()) {
                 String prefix = result.getString(Models.OBJECT_UID.UID_PREFIX);
                 String postfix = result.getString(Models.OBJECT_UID.UID_POSTFIX);
                 Integer count = result.getInt(Models.OBJECT_UID.UID_CURRENT_COUNT);
                 Map<String, Object> retList = new HashMap<>();
-                retList.put("prefix",prefix);
-                retList.put("current_count",count);
-                retList.put("postfix",postfix);
+                retList.put("prefix", prefix);
+                retList.put("current_count", count);
+                retList.put("postfix", postfix);
                 System.out.println(retList);
                 return retList;
             }
@@ -223,9 +224,9 @@ public class HospitalDatabase extends SQLDatabase {
         return null;
     }
 
-    public void insertPerson(Person person){
+    public void insertPerson(Person person) {
 
-        if (validatePerson(person)){
+        if (validatePerson(person)) {
             ContentValues values = new ContentValues();
             values.put(Models.PERSON.OBJECT_ID, person.getObjectID());
             values.put(Models.PERSON.FIRSTNAME, person.getFirstName());
@@ -247,7 +248,7 @@ public class HospitalDatabase extends SQLDatabase {
                 if (execSQL().withTable("PERSONS").insert(values).commit().isSuccessful()) {
                     if (person.getProperties().size() > 0) {
                         Map<String, Object> info = person.getAllInfo();
-                        for (String key: info.keySet()) {
+                        for (String key : info.keySet()) {
                             ContentValues contentValues = new ContentValues();
                             contentValues.put(Models.OBJECT_INFO.OBJECT_ID, person.getObjectID());
                             contentValues.put(Models.OBJECT_INFO.OBJECT_TYPE, person.getType());
@@ -265,16 +266,17 @@ public class HospitalDatabase extends SQLDatabase {
             }
         }
     }
-    public void updatePersonProperties(Person person, String... fields){
+
+    public void updatePersonProperties(Person person, String... fields) {
         //update if key already exist else create new entry
 
-        if (validatePerson(person)){
+        if (validatePerson(person)) {
             Map<String, Object> x = person.getProperties();
             ContentValues values = new ContentValues();
-            for (String field: fields){
-                if (person.hasProperty(field)){
+            for (String field : fields) {
+                if (person.hasProperty(field)) {
                     values.put(field, person.getProperty(field));
-                }else{
+                } else {
                     //
                 }
             }
@@ -296,40 +298,97 @@ public class HospitalDatabase extends SQLDatabase {
 //            execSQL().withTable("OBJECT_INFO").insert(contentValues).commit();
 //        }
     }
-    public void updatePersonInformation(Person person, String... fields){}
-    public void updatePersonProperties(Person person, ContentValues contentValues){}
-    public void updatePersonInformation(Person person, ContentValues contentValues){}
 
-    public void removePerson(Person person){}
-    public void getPatients(String... ids){}
-    public void getVisitors(String... ids){}
-    public void getStaffs(String... ids){}
+    public void updatePersonInformation(Person person, String... fields) {
+    }
 
-    public void findPerson(Person person){}
-    public void findStaff(Person person){}
-    public void findPatient(Person person){}
-    public void findVisitor(Person person){}
+    public void updatePersonProperties(Person person, ContentValues contentValues) {
+    }
 
-    public void insertRoom(Room room){}
-    public void updateRoomProperties(Room room, String... fields){}
-    public void updateRoomInformation(Room room, String... fields){}
-    public void updateRoomProperties(Room room, ContentValues contentValues){}
-    public void updateRoomInformation(Room room, ContentValues contentValues){}
-    public void removeRoom(Room room){}
-    public void getRooms(){}
-    public void getAvailableRooms(){}
-    public void getOccuppiedRooms(){}
+    public void updatePersonInformation(Person person, ContentValues contentValues) {
+    }
 
-    public void insertUtilty(Utility room){}
-    public void updateUtiltyInformation(Utility room, String... fields){}
-    public void updateUtiltyProperties(Utility room, String... fields){}
-    public void updateUtiltyInformation(Utility room, ContentValues contentValues){}
-    public void updateUtiltyProperties(Utility room, ContentValues contentValues){}
-    public void removeUtilty(Utility room){}
-    public void setRoomUtilities(List<Utility> utilities){}
-    public void getRoomUtilities(Person person){}
+    public void removePerson(Person person) {
+    }
 
-    public void insertInfo(){}
-    public void updateInfo(){}
-    public void removeInfo(){}
+    public void getPatients(String... ids) {
+    }
+
+    public void getVisitors(String... ids) {
+    }
+
+    public void getStaffs(String... ids) {
+    }
+
+    public void findPerson(Person person) {
+    }
+
+    public void findStaff(Person person) {
+    }
+
+    public void findPatient(Person person) {
+    }
+
+    public void findVisitor(Person person) {
+    }
+
+    public void insertRoom(Room room) {
+    }
+
+    public void updateRoomProperties(Room room, String... fields) {
+    }
+
+    public void updateRoomInformation(Room room, String... fields) {
+    }
+
+    public void updateRoomProperties(Room room, ContentValues contentValues) {
+    }
+
+    public void updateRoomInformation(Room room, ContentValues contentValues) {
+    }
+
+    public void removeRoom(Room room) {
+    }
+
+    public void getRooms() {
+    }
+
+    public void getAvailableRooms() {
+    }
+
+    public void getOccuppiedRooms() {
+    }
+
+    public void insertUtilty(Utility room) {
+    }
+
+    public void updateUtiltyInformation(Utility room, String... fields) {
+    }
+
+    public void updateUtiltyProperties(Utility room, String... fields) {
+    }
+
+    public void updateUtiltyInformation(Utility room, ContentValues contentValues) {
+    }
+
+    public void updateUtiltyProperties(Utility room, ContentValues contentValues) {
+    }
+
+    public void removeUtilty(Utility room) {
+    }
+
+    public void setRoomUtilities(List<Utility> utilities) {
+    }
+
+    public void getRoomUtilities(Person person) {
+    }
+
+    public void insertInfo() {
+    }
+
+    public void updateInfo() {
+    }
+
+    public void removeInfo() {
+    }
 }

@@ -33,10 +33,6 @@ public class Room {
         return getAllInfo().containsKey(object_id);
     }
 
-    public void setType(String type) {
-        setProperty(Models.ROOM.TYPE, type);
-    }
-
     public void setParent(Room room) {
         setProperty(Models.ROOM.PARENT, room.getObjectID());
     }
@@ -53,27 +49,31 @@ public class Room {
         return getProperty(Models.ROOM.TYPE).toString();
     }
 
-    public void addInfo(String key, Object value){
+    public void setType(String type) {
+        setProperty(Models.ROOM.TYPE, type);
+    }
+
+    public void addInfo(String key, Object value) {
         this.INFO.put(key, value);
     }
 
-    public Object getInfo(String key){
+    public Object getInfo(String key) {
         return this.INFO.get(key);
     }
 
-    public Map<String, Object> getAllInfo(){
+    public Map<String, Object> getAllInfo() {
         return this.INFO;
     }
 
-    public void setProperty(String key, Object value){
+    public void setProperty(String key, Object value) {
         this.PROPERTIES.put(key, value);
     }
 
-    public Object getProperty(String key){
+    public Object getProperty(String key) {
         return this.PROPERTIES.get(key);
     }
 
-    public Map<String, Object> getProperties(){
+    public Map<String, Object> getProperties() {
         return this.PROPERTIES;
     }
 
@@ -82,21 +82,23 @@ public class Room {
     }
 
     public Utility getUtilityWithID(Object object_id) {
-        for (Utility utility: UTILITIES){
-            if (utility.getObjectID().toString().equals(object_id.toString())){
+        for (Utility utility : UTILITIES) {
+            if (utility.getObjectID().toString().equals(object_id.toString())) {
                 return utility;
             }
         }
         return null;
     }
 
-    public void addInnerRoom(Room room){
+    public void addInnerRoom(Room room) {
         this.INNER_ROOMS.add(room);
     }
-    public boolean hasInnerRooms(){
+
+    public boolean hasInnerRooms() {
         return this.INNER_ROOMS.size() > 0;
     }
-    public List<Room> getInnerRooms(){
+
+    public List<Room> getInnerRooms() {
         return this.INNER_ROOMS;
     }
 
@@ -122,6 +124,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room<"+getObjectID()+">";
+        return "Room<" + getObjectID() + ">";
     }
 }

@@ -1,6 +1,9 @@
 package com.techupstudio.school_management_system.base.sqlite_database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,14 +12,14 @@ public class SQLDatabase {
     private Connection connection;
     private Logger logger;
 
-    public SQLDatabase(String db_path){
+    public SQLDatabase(String db_path) {
 
         connection = null;
         logger = Logger.getLogger("SQLDatabase: ");
 
         try {
             //Class.forName("org.sqlite.JDBC");
-            String connectURI = "jdbc:sqlite:"+db_path;
+            String connectURI = "jdbc:sqlite:" + db_path;
             connection = DriverManager.getConnection(connectURI);
             logger.log(Level.INFO, "HospitalDatabase connection successful");
         } catch (SQLException e) {
@@ -50,8 +53,8 @@ public class SQLDatabase {
         return true;
     }
 
-    public Statement getStatement(){
-        if (hasConnection()){
+    public Statement getStatement() {
+        if (hasConnection()) {
             try {
                 return getConnection().createStatement();
             } catch (SQLException e) {

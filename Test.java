@@ -14,17 +14,15 @@ public class Test {
 
     private static Hospital ugHospital;
 
-    interface Operation{ void run();}
-
-    private static void loopOperation(Operation operation, int number){
-        for (int i=0;i<number;i++){
+    private static void loopOperation(Operation operation, int number) {
+        for (int i = 0; i < number; i++) {
             operation.run();
         }
     }
 
-    private static void prepareUgHospital(){
+    private static void prepareUgHospital() {
 
-        ugHospital = new Hospital("src/com/techupstudio/base/data/test_ug_hospital_database.db") {
+        ugHospital = new Hospital("src/com/techupstudio/school_management_system/data/test_ug_hospital_database.db") {
 
             @Override
             public void prepareHospital() {
@@ -65,8 +63,7 @@ public class Test {
 
     }
 
-
-    public static Hospital getUGHospital(){
+    public static Hospital getUGHospital() {
         return ugHospital;
     }
 
@@ -74,15 +71,24 @@ public class Test {
         prepareUgHospital();
 
         Staff staff = new Staff();
-        staff.setFirstName("Bernard");staff.setMiddleName("Azumah");staff.setLastName("Atinga");
-        staff.setDateOfBirth(new Date());staff.setContact("0553567950");staff.setJobTitle("doctor");
-        staff.setGender("male");staff.addInfo("salary", 2350);
+        staff.setFirstName("Bernard");
+        staff.setMiddleName("Azumah");
+        staff.setLastName("Atinga");
+        staff.setDateOfBirth(new Date());
+        staff.setContact("0553567950");
+        staff.setJobTitle("doctor");
+        staff.setGender("male");
+        staff.addInfo("salary", 2350);
         staff.setObjectID(getUGHospital().nextUIDForObjectType(staff.getType()));
         getUGHospital().addStaff(staff);
 
         staff.setProperty("salary", 3000);
         getUGHospital().getDataBase().updatePersonInformation(staff, Models.STAFF.INFO_JOB_TITLE);
 
+    }
+
+    interface Operation {
+        void run();
     }
 
 }

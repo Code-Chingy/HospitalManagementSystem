@@ -12,7 +12,7 @@ public abstract class Person {
     private Map<String, Object> PROPERTIES;
     private Map<String, Object> INFO;
 
-    public Person(){
+    public Person() {
         //TODO : generate object OBJECT_ID
         PROPERTIES = new HashMap<>();
         INFO = new HashMap<>();
@@ -27,52 +27,28 @@ public abstract class Person {
         return getAllInfo().containsKey(object_id);
     }
 
-    public void setObjectID(String object_id) {
-        setProperty(Models.PERSON.OBJECT_ID, object_id);
+    public String getFirstName() {
+        return getProperty(Models.PERSON.FIRSTNAME).toString();
     }
 
     public void setFirstName(String firstName) {
         setProperty(Models.PERSON.FIRSTNAME, firstName);
     }
 
-    public void setMiddleName(String middleName) {
-        setProperty(Models.PERSON.MIDDLENAME, middleName);
-    }
-
-    public void setLastName(String lastName) {
-        setProperty(Models.PERSON.LASTNAME, lastName);
-    }
-
-    public void setAddress(String address) {
-        setProperty(Models.PERSON.ADDRESS, address);
-    }
-
-    public void setGender(String gender) {
-        setProperty(Models.PERSON.GENDER, gender);
-    }
-
-    public void setContact(String contact) {
-        setProperty(Models.PERSON.CONTACT, contact);
-    }
-
-    public void setDateOfBirth(Date date_of_birth) {
-        setProperty(Models.PERSON.DATEOFBIRTH, date_of_birth);
-    }
-
-    public void setType(String type) {
-        setProperty(Models.PERSON.TYPE, type);
-    }
-
-    public String getFirstName() {
-        return getProperty(Models.PERSON.FIRSTNAME).toString();
-    }
-
     public String getMiddleName() {
         return getProperty(Models.PERSON.MIDDLENAME).toString();
     }
 
+    public void setMiddleName(String middleName) {
+        setProperty(Models.PERSON.MIDDLENAME, middleName);
+    }
+
     public String getLastName() {
         return getProperty(Models.PERSON.LASTNAME).toString();
+    }
+
+    public void setLastName(String lastName) {
+        setProperty(Models.PERSON.LASTNAME, lastName);
     }
 
     public String getFullName() {
@@ -85,17 +61,25 @@ public abstract class Person {
         return getProperty(Models.PERSON.FIRSTNAME).toString();
     }
 
+    public void setAddress(String address) {
+        setProperty(Models.PERSON.ADDRESS, address);
+    }
+
     public String getGender() {
         return getProperty(Models.PERSON.GENDER).toString();
+    }
+
+    public void setGender(String gender) {
+        setProperty(Models.PERSON.GENDER, gender);
     }
 
     public String getContact() {
         return getProperty(Models.PERSON.CONTACT).toString();
     }
 
-//    public Integer getAge() {
-//        return (new Date() - new Date(dob)) / 356;
-//    }
+    public void setContact(String contact) {
+        setProperty(Models.PERSON.CONTACT, contact);
+    }
 
     public void setProperty(String key, Object value) {
         PROPERTIES.put(key, value);
@@ -105,12 +89,28 @@ public abstract class Person {
         return getProperty(Models.PERSON.OBJECT_ID).toString();
     }
 
+    public void setObjectID(String object_id) {
+        setProperty(Models.PERSON.OBJECT_ID, object_id);
+    }
+
+//    public Integer getAge() {
+//        return (new Date() - new Date(dob)) / 356;
+//    }
+
     public Date getDateOfBirth() {
         return (Date) getProperty(Models.PERSON.DATEOFBIRTH);
     }
 
+    public void setDateOfBirth(Date date_of_birth) {
+        setProperty(Models.PERSON.DATEOFBIRTH, date_of_birth);
+    }
+
     public String getType() {
         return getProperty(Models.PERSON.TYPE).toString();
+    }
+
+    public void setType(String type) {
+        setProperty(Models.PERSON.TYPE, type);
     }
 
     public Map<String, Object> getProperties() {
@@ -135,7 +135,7 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person<"+getObjectID()+">";
+        return "Person<" + getObjectID() + ">";
     }
 
 }

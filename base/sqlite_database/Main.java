@@ -31,7 +31,7 @@ public class Main {
                 .groupBy("job_title").orderBy("count")
                 .getResult().paginate(10).get();
 
-        while (result.hasNextBatch()){
+        while (result.hasNextBatch()) {
             System.out.println(result.getNextBatch());
 
 //            System.out.println("age = "+result.getInt("age"));

@@ -4,6 +4,6 @@ public class InPatient extends Person {
 
     @Override
     public String toString() {
-        return "Patient<"+getObjectID()+">";
+        return "Patient<" + getObjectID() + ">";
     }
 }

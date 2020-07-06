@@ -7,16 +7,16 @@ public class Staff extends Person {
         this.setType(this.getClass().getSimpleName().toLowerCase());
     }
 
-    public void setJobTitle(String jobTitle) {
-        addInfo("job_title", jobTitle);
-    }
-
     public String getJobTitle() {
         return getInfo("job_title").toString();
     }
 
+    public void setJobTitle(String jobTitle) {
+        addInfo("job_title", jobTitle);
+    }
+
     @Override
     public String toString() {
-        return "Staff<"+getObjectID()+">";
+        return "Staff<" + getObjectID() + ">";
     }
 }
